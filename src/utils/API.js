@@ -1,5 +1,5 @@
 export async function fetcher(apiRoute) {
-  const url = "https://fakestoreapi.com/" + apiRoute
+  const url = "https://dummyjson.com/products/" + apiRoute
 
   const options = {
     method: "GET",
@@ -12,16 +12,3 @@ export async function fetcher(apiRoute) {
   return data
 }
 ///////////////////////
-export async function fetcher2(apiRoute) {
-  const url = "https://api.escuelajs.co/api/v1/" + apiRoute
-
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-    },
-  }
-  const response = await fetch(url, options)
-  const data = await response.json()
-  return data
-}

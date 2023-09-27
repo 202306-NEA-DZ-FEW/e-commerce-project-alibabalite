@@ -3,7 +3,7 @@ import { fetcher, fetcher2 } from "@/utils/API"
 
 export default function Home({ products }) {
   console.log(products)
-  return <main>E_commerce</main>
+  return <main></main>
 }
 
 export async function getStaticProps() {
