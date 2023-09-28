@@ -1,8 +1,7 @@
 export async function fetcher(apiRoute) {
-  const url = "https://dummyjson.com/products/" + apiRoute
+  const url = "https://dummyjson.com/" + apiRoute
 
   const options = {
-    method: "GET",
     headers: {
       accept: "application/json",
     },

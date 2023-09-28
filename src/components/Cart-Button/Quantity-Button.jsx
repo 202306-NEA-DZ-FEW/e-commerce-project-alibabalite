@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { FaPlus, FaMinus } from "react-icons/fa"
 
 const QuantityButton = () => {
   const [quantity, setQuantity] = useState(0)
@@ -14,13 +15,19 @@ const QuantityButton = () => {
   }
 
   return (
-    <div className="flex items-center border-solid border-2 border-slate-500">
-      <button onClick={decreaseQuantity} className="px-4 py-1 text-gray-800">
-        -
+    <div className="flex items-center border-solid border-2 rounded-lg border-slate-500 pb-2 pt-2">
+      <button
+        onClick={decreaseQuantity}
+        className="px-4  text-gray-800 items-center"
+      >
+        <FaMinus />
       </button>
       <span className="mx-4">{quantity}</span>
-      <button onClick={increaseQuantity} className="px-4 py-1 text-gray-800">
-        +
+      <button
+        onClick={increaseQuantity}
+        className="px-4  text-gray-800 items-center"
+      >
+        <FaPlus />
       </button>
     </div>
   )
