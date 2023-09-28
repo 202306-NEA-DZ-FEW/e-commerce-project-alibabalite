@@ -7,7 +7,7 @@ export default function Home({ products }) {
 }
 
 export async function getStaticProps() {
-  const response = await fetcher2("products")
+  const response = await fetcher("products")
 
   return {
     props: {
