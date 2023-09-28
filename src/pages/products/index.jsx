@@ -1,12 +1,32 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Sidebar from "@/components/Sidebar/Sidebar"
 import ProductCard from "@/components/Productcard/Productcard"
 import { fetcher } from "@/utils/API"
+
 function ProductsPage({ products, categories }) {
   const [categoryFilter, setCategoryFilter] = useState("all")
   const [priceFilter, setPriceFilter] = useState([0, 2000])
   const [ratingFilter, setratingFilter] = useState(1)
   const [titleFilter, settitleFilter] = useState("")
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
+  }
+  const handleResize = () => {
+    // Automatically open the sidebar on medium and large screens (md and lg)
+    if (window.innerWidth >= 768) {
+      setIsSidebarOpen(true)
+    } else {
+      setIsSidebarOpen(false)
+    }
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
   const filterProducts = () => {
     // Initialize filteredProducts as all products
     let filteredProducts = products.products
@@ -42,18 +62,25 @@ function ProductsPage({ products, categories }) {
   const filteredProducts = filterProducts()
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <Sidebar
-        categories={categories}
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-        priceFilter={priceFilter}
-        setPriceFilter={setPriceFilter}
-        ratingFilter={ratingFilter}
-        setratingFilter={setratingFilter}
-        titleFilter={titleFilter}
-        settitleFilter={settitleFilter}
-      />
+    <div className="grid md:grid-cols-4">
+      <div
+        className={`md:col-span-1 ${
+          isSidebarOpen ? "block" : "hidden"
+        } sm:block`}
+      >
+        <Sidebar
+          className={`w-1/2`}
+          categories={categories}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          priceFilter={priceFilter}
+          setPriceFilter={setPriceFilter}
+          ratingFilter={ratingFilter}
+          setratingFilter={setratingFilter}
+          titleFilter={titleFilter}
+          settitleFilter={settitleFilter}
+        />
+      </div>
       <main className="flex flex-wrap ">
         {/* Product cards go here */}
         {filteredProducts.map((product) => (
