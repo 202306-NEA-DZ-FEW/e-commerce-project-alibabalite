@@ -11,4 +11,3 @@ export async function fetcher(apiRoute) {
   const data = await response.json()
   return data
 }
-///////////////////////
