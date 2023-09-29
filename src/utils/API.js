@@ -13,7 +13,7 @@ export async function fetcher(apiRoute) {
 }
 ///////////////////////
 export async function fetcher2(apiRoute) {
-  const url = "https://api.escuelajs.co/api/v1/" + apiRoute
+  const url = "https://dummyjson.com/" + apiRoute
 
   const options = {
     method: "GET",
