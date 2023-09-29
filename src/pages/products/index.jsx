@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Sidebar from "@/components/Sidebar/Sidebar"
 import ProductCard from "@/components/Productcard/Productcard"
 import { fetcher } from "@/utils/API"
+import Navbar from "@/components/Navbar/Navbar"
 
 function ProductsPage({ products, categories }) {
   const [categoryFilter, setCategoryFilter] = useState("all")
@@ -62,41 +63,45 @@ function ProductsPage({ products, categories }) {
   const filteredProducts = filterProducts()
 
   return (
-    <div className="md:grid md:grid-cols-4 md:mt-10 md:ml-3 mr-3s grid grid-cols-4 mt-10 ml-3 mr-3s">
-      <div
-        className={`md:col-span-1 md:ml-3 md:mr-3 md:bg-c col-span-1 ml-3 mr-3 bg-slate-100 ${
-          isSidebarOpen ? "block" : "hidden"
-        } sm:block`}
-      >
-        <Sidebar
-          categories={categories}
-          categoryFilter={categoryFilter}
-          setCategoryFilter={setCategoryFilter}
-          priceFilter={priceFilter}
-          setPriceFilter={setPriceFilter}
-          ratingFilter={ratingFilter}
-          setRatingFilter={setratingFilter}
-          titleFilter={titleFilter}
-          setTitleFilter={settitleFilter}
-        />
-      </div>
-      <main className="md:col-start-2 md:col-span-3 col-start-2 col-span-3">
-        {/* Product cards go here */}
-        <div className="mb-6 px-10 text-3xl">Our Products</div>
-        <div className="flex flex-wrap">
-          {filteredProducts.map((product) => (
-            <ProductCard
-              className={`w-1/4 px-2 mt-2 mb-10`}
-              key={product.id}
-              imageSrc={product.thumbnail}
-              title={product.title}
-              description={product.description}
-              rating={product.rating}
-              price={product.price}
-            />
-          ))}
+    <div>
+      <Navbar />
+
+      <div className="md:grid md:grid-cols-4 md:mt-10 md:ml-3 mr-3s grid grid-cols-4 mt-10 ml-3 mr-3s">
+        <div
+          className={`md:col-span-1 md:ml-3 md:mr-3 md:bg-c col-span-1 ml-3 mr-3 bg-slate-100 ${
+            isSidebarOpen ? "block" : "hidden"
+          } sm:block`}
+        >
+          <Sidebar
+            categories={categories}
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
+            priceFilter={priceFilter}
+            setPriceFilter={setPriceFilter}
+            ratingFilter={ratingFilter}
+            setRatingFilter={setratingFilter}
+            titleFilter={titleFilter}
+            setTitleFilter={settitleFilter}
+          />
         </div>
-      </main>
+        <main className="md:col-start-2 md:col-span-3 col-start-2 col-span-3">
+          {/* Product cards go here */}
+          <div className="mb-6 px-10 text-3xl">Our Products</div>
+          <div className="flex flex-wrap">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                className={`w-1/4 px-2 mt-2 mb-10`}
+                key={product.id}
+                imageSrc={product.thumbnail}
+                title={product.title}
+                description={product.description}
+                rating={product.rating}
+                price={product.price}
+              />
+            ))}
+          </div>
+        </main>
+      </div>
     </div>
   )
 }
