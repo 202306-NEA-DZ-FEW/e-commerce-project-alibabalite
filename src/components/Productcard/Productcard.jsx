@@ -1,52 +1,63 @@
 import React from "react"
+import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs"
+import { TbShoppingCartPlus } from "react-icons/tb"
+// import Link from "next/link"
+// import { genresList } from "@/utils/static"
 
-function ProductCard({ imageSrc, title, description, rating, price }) {
+const ProductCard = ({ imageSrc, title, description, rating, price }) => {
+  const renderStars = () => {
+    const stars = []
+    const fullStars = Math.floor(rating / 2)
+    const hasHalfStar = (rating / 2) % 1 !== 0
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <span key={i} className="text-yellow-400">
+          <BsStarFill />
+        </span>,
+      )
+    }
+
+    if (hasHalfStar && stars.length < 5) {
+      stars.push(
+        <span key={fullStars} className="text-yellow-400">
+          <BsStarHalf />
+        </span>,
+      )
+    }
+
+    while (stars.length < 5) {
+      stars.push(
+        <span key={stars.length} className="text-gray-400">
+          <BsStar />
+        </span>,
+      )
+    }
+    return stars
+  }
   return (
-    <div className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
-      <div className="w-full md:w-1/3 bg-white grid place-items-center">
-        <img src={imageSrc} alt={title} className="rounded-xl" />
+    <div className=" flex-wrap rounded-lg overflow-hidden shadow-lg w-60 h-66 flex-shrink-1 mr-2 ml-2 mb-2 mt-2 relative transform transition-transform duration-300 ease-in-out hover:scale-105">
+      <div>
+        <img className="w-full h-48 object-cover" src={imageSrc} alt={title} />
       </div>
-      <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
-        <div className="flex justify-between item-center">
-          <p className="text-gray-500 font-medium hidden md:block">Vacations</p>
-          <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-yellow-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              {/* Star icon */}
-            </svg>
-            <p className="text-gray-600 font-bold text-sm ml-1">
-              {rating}
-              <span className="text-gray-500 font-normal">(76 reviews)</span>
-            </p>
-          </div>
-          <div className="">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-pink-500"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              {/* Heart icon */}
-            </svg>
-          </div>
-          <div className="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block">
-            Superhost
-          </div>
+
+      <div className="flex flex-col justify-between h-full ">
+        <div className=" top-0 left-0 w-full p-3 text-white transition-opacity duration-300 ease-in-out opacity-100">
+          <h2 className="text-sm font-bold text-black ">{title}</h2>
+          <p className="my-1 flex list-none gap-0.5 p-0 mt-1">
+            {renderStars()}
+          </p>
+          <p className="font-bold text-red-700 text-sm mt-3">${price}</p>
         </div>
-        <h3 className="font-black text-gray-800 md:text-3xl text-xl">
-          {title}
-        </h3>
-        <p className="md:text-lg text-gray-500 text-base">{description}</p>
-        <p className="text-xl font-black text-gray-800">
-          {price}
-          <span className="font-normal text-gray-600 text-base"></span>
-        </p>
+        <div className="px-6 mb-2 flex justify-end">
+          <button className="bg-gray-500 hover:bg-yellow-500 text-white font-semibold px-4 py-1 rounded-lg inline-flex items-center">
+            <TbShoppingCartPlus className="mr-1" />
+            Add
+          </button>
+        </div>
       </div>
     </div>
   )
 }
+
 export default ProductCard

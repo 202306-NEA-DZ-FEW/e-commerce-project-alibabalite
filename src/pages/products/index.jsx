@@ -37,7 +37,7 @@ function ProductsPage({ products, categories }) {
       )
     }
 
-    if (priceFilter !== "[0,100]") {
+    if (priceFilter !== "[0,2000]") {
       filteredProducts = filteredProducts.filter((product) => {
         const price = parseFloat(product.price)
         return price >= priceFilter[0] && price <= priceFilter[1]
@@ -62,37 +62,40 @@ function ProductsPage({ products, categories }) {
   const filteredProducts = filterProducts()
 
   return (
-    <div className="grid md:grid-cols-4">
+    <div className="md:grid md:grid-cols-4 md:mt-10 md:ml-3 mr-3s grid grid-cols-4 mt-10 ml-3 mr-3s">
       <div
-        className={`md:col-span-1 ${
-          isSidebarOpen ? "block" : "hidden"
+        className={`md:col-span-1 md:ml-3 md:mr-3 md:bg-c col-span-1 ml-3 mr-3 bg-cyan-100 ${
+          isSidebarOpen ? "fixed" : "hidden"
         } sm:block`}
       >
         <Sidebar
-          className={`w-1/2`}
           categories={categories}
           categoryFilter={categoryFilter}
           setCategoryFilter={setCategoryFilter}
           priceFilter={priceFilter}
           setPriceFilter={setPriceFilter}
           ratingFilter={ratingFilter}
-          setratingFilter={setratingFilter}
+          setRatingFilter={setratingFilter}
           titleFilter={titleFilter}
-          settitleFilter={settitleFilter}
+          setTitleFilter={settitleFilter}
         />
       </div>
-      <main className="flex flex-wrap ">
+      <main className="md:col-start-2 md:col-span-3 col-start-2 col-span-3">
         {/* Product cards go here */}
-        {filteredProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            imageSrc={product.thumbnail}
-            title={product.title}
-            description={product.description}
-            rating={product.rating}
-            price={product.price}
-          />
-        ))}
+        <div className="mb-6 px-10 text-3xl">Our Products</div>
+        <div className="flex flex-wrap">
+          {filteredProducts.map((product) => (
+            <ProductCard
+              className={`w-1/4 px-2 mt-2 mb-10`}
+              key={product.id}
+              imageSrc={product.thumbnail}
+              title={product.title}
+              description={product.description}
+              rating={product.rating}
+              price={product.price}
+            />
+          ))}
+        </div>
       </main>
     </div>
   )

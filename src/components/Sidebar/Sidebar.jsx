@@ -49,12 +49,11 @@ function Sidebar({
       </span>,
     )
   }
-
   return (
-    <aside className="sidebar">
+    <aside className="sidebar ">
       {/* Sidebar filters go here */}
       <h2 className="text-2xl font-bold mb-4">Filters</h2>
-      <label htmlFor="category" className="text-lg font-medium">
+      <label htmlFor="category" className="text-lg text-w ">
         Category:
       </label>
       <select
@@ -70,25 +69,29 @@ function Sidebar({
           </option>
         ))}
       </select>
-      <label htmlFor="price" className="text-lg font-medium mt-4">
-        Price:
-      </label>
-      <div className="relative mt-1">
-        <Slider
-          range
-          min={0}
-          max={2000}
-          value={priceFilter}
-          onChange={setPriceFilter}
-          trackStyle={{ backgroundColor: "blue" }}
-          handleStyle={[
-            { backgroundColor: "blue", border: "2px solid white" },
-            { backgroundColor: "blue", border: "2px solid white" },
-          ]}
-        />
-        <div className="absolute left-0 top-0 right-0 -mt-8 text-center">
-          <span className="text-gray-500">Min: ${priceFilter[0]}</span>
-          <span className="text-gray-500 ml-auto">Max: ${priceFilter[1]}</span>
+      <div className="mt-3 ml-2 mr-2">
+        <label htmlFor="price" className="text-lg font-medium py-2">
+          Price:
+        </label>
+        <div className="relative mt-4">
+          <Slider
+            range
+            min={0}
+            max={2000}
+            value={priceFilter}
+            onChange={setPriceFilter}
+            trackStyle={{ backgroundColor: "blue" }}
+            handleStyle={[
+              { backgroundColor: "blue", border: "2px solid white" },
+              { backgroundColor: "blue", border: "2px solid white" },
+            ]}
+          />
+          <div className="flex left-0 top-0 right-0 -mt-8 text-center">
+            <span className="text-gray-500 mb-10">Min: ${priceFilter[0]}</span>
+            <span className="text-gray-500 ml-auto">
+              Max: ${priceFilter[1]}
+            </span>
+          </div>
         </div>
       </div>
       <label htmlFor="rating" className="text-lg font-medium mt-4">
