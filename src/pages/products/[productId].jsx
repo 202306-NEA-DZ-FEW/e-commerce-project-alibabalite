@@ -1,4 +1,4 @@
-import QuantityButton from "@/components/Cart-Button/Quantity-Button"
+import { useState } from "react"
 import { fetcher } from "@/utils/API"
 import { FaStar, FaCartPlus, MdProductionQuantityLimits } from "react-icons/fa"
 import { useRouter } from "next/router"
@@ -7,6 +7,13 @@ import ProgressCard from "@/components/Cards/ProgressCard"
 export default function singleProductPage({ productData }) {
   /* eslint-disable react-hooks/rules-of-hooks */
   const { productId } = useRouter().query
+  const [selectedImage, setSelectedImage] = useState(
+    `https://i.dummyjson.com/data/products/${productId}/thumbnail.jpg`,
+  )
+
+  const handleThumbnailClick = (imageSrc) => {
+    setSelectedImage(imageSrc)
+  }
 
   // UseState to handle Images
   return (
@@ -15,63 +22,39 @@ export default function singleProductPage({ productData }) {
       <div className="first-section w-full grid grid-cols-2 gap-10 pl-20 pr-20">
         <div className="product-pictures col-span-2 md:col-span-2 lg:col-span-1 grid grid-cols-3 gap-4">
           <div
-            className="col-span-3 justify-center border-solid border-2 border-gray-600 rounded-lg"
-            style={{ height: "400px" }}
+            className="col-span-3 justify-center border-solid border-2 border-slate-200 rounded-lg transition-transform transform hover:scale-105"
+            style={{ height: "500px" }}
           >
             <img
-              src={`https://i.dummyjson.com/data/products/${productId}/thumbnail.jpg`}
+              src={selectedImage}
               srcSet={`
               https://i.dummyjson.com/data/products/${productId}/thumbnail.webp
               https://i.dummyjson.com/data/products/${productId}/thumbnail.png
             `}
               alt=""
-              className="object-cover object-center w-full h-full rounded-lg"
+              className="object-cover object-center w-full h-full rounded-lg cursor-pointer"
             />
           </div>
-          <div
-            className="col-span-1 border-solid border-2 border-gray-600 rounded-lg"
-            style={{ height: "120px" }}
-          >
-            <img
-              src={`https://i.dummyjson.com/data/products/${productId}/1.jpg`}
-              srcSet={`
-              https://i.dummyjson.com/data/products/${productId}/1.webp
-              https://i.dummyjson.com/data/products/${productId}/1.png
-            `}
-              alt=""
-              className="object-cover object-center w-full h-full rounded-lg"
-            />
-          </div>
-          <div
-            className="col-span-1 border-solid border-2 border-gray-600 rounded-lg"
-            style={{ height: "120px" }}
-          >
-            <img
-              src={`https://i.dummyjson.com/data/products/${productId}/2.jpg`}
-              srcSet={`
-              https://i.dummyjson.com/data/products/${productId}/2.webp
-              https://i.dummyjson.com/data/products/${productId}/2.png
-            `}
-              alt=""
-              className="object-cover object-center w-full h-full rounded-lg"
-            />
-          </div>
-          <div
-            className="col-span-1 border-solid border-2 border-gray-600 rounded-lg"
-            style={{ height: "120px" }}
-          >
-            <img
-              src={`https://i.dummyjson.com/data/products/${productId}/3.jpg`}
-              srcSet={`
-              https://i.dummyjson.com/data/products/${productId}/3.webp
-              https://i.dummyjson.com/data/products/${productId}/3.png
-            `}
-              alt=""
-              className="object-cover object-center w-full h-full rounded-lg"
-            />
-          </div>
+          {[1, 2, 3].map((index) => (
+            <div
+              key={index}
+              className="col-span-1 border-solid border-2 border-slate-200 rounded-lg transition-transform transform hover:scale-105 cursor-pointer"
+              style={{ height: "130px" }}
+              onClick={() =>
+                handleThumbnailClick(
+                  `https://i.dummyjson.com/data/products/${productId}/${index}.jpg`,
+                )
+              }
+            >
+              <img
+                src={`https://i.dummyjson.com/data/products/${productId}/${index}.jpg`}
+                alt=""
+                className="object-cover object-center w-full h-full rounded-lg"
+              />
+            </div>
+          ))}
         </div>
-        <div className="details-section col-span-2 md:col-span-2 lg:col-span-1 grid grid-cols-3 items-center">
+        <div className="details-section bg-slate-50 p-4 rounded-lg col-span-2 md:col-span-2 lg:col-span-1 grid grid-cols-3 items-center">
           <div className="product-title col-span-3 grid-cols-4">
             <h1 className="col-span-4 text-center md:text-center lg:text-start text-3xl font-bold w-full mb-4">
               {productData.title}
@@ -126,7 +109,7 @@ export default function singleProductPage({ productData }) {
             </p>
           </div>
           <div className="cart-section col-span-3 mt-4">
-            <button className="btn btn-primary w-full">
+            <button className="btn btn-primary hover:bg-cyan-700 hover:text-white rounded-lg w-full">
               Add to Cart <FaCartPlus />
             </button>
           </div>
@@ -135,7 +118,7 @@ export default function singleProductPage({ productData }) {
       {/* Product Details Ends Here */}
       {/* Second Section Starts Here */}
       <div className="second-section w-full h-full mt-24 pl-20 pr-20">
-        <h1 className="text-3xl font-bold text-start border-b-gray-300 pb-4 border-solid border-b-2 lg:w-full mr-auto">
+        <h1 className="text-3xl font-bold text-center md:text-center lg:text-start border-b-gray-300 pb-4 border-solid border-b-2 lg:w-full mr-auto">
           Reviews
         </h1>
         <div className="reviews grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-10 border-b-gray-300 border-solid border-b-2 mb-20 pb-4">
