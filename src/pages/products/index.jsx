@@ -64,7 +64,17 @@ function ProductsPage({ products, categories }) {
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        categories={categories}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={setCategoryFilter}
+        priceFilter={priceFilter}
+        setPriceFilter={setPriceFilter}
+        ratingFilter={ratingFilter}
+        setRatingFilter={setratingFilter}
+        titleFilter={titleFilter}
+        setTitleFilter={settitleFilter}
+      />
       <div className="md:grid md:grid-cols-4 md:mt-10 md:ml-3 mr-3s grid grid-cols-4 mt-10 ml-3 mr-3s">
         <div
           className={`md:col-span-1 md:ml-3 md:mr-3 md:bg-c col-span-1 ml-3 mr-3 bg-slate-100 ${

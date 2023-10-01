@@ -7,9 +7,13 @@ import Carousel from "@/components/Carousel"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import { useState } from "react"
 
-const Homepage = ({ products }) => {
-  console.log(products.products)
+const Homepage = ({ products, categories }) => {
+  const [categoryFilter, setCategoryFilter] = useState("all")
+  const [priceFilter, setPriceFilter] = useState([0, 2000])
+  const [ratingFilter, setratingFilter] = useState(1)
+  const [titleFilter, settitleFilter] = useState("")
 
   const slicedProducts = products.products.slice(0, 5)
 
@@ -38,7 +42,17 @@ const Homepage = ({ products }) => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        categories={categories}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={setCategoryFilter}
+        priceFilter={priceFilter}
+        setPriceFilter={setPriceFilter}
+        ratingFilter={ratingFilter}
+        setRatingFilter={setratingFilter}
+        titleFilter={titleFilter}
+        setTitleFilter={settitleFilter}
+      />
       <main className="bg-gray-100">
         <div className="grid grid-cols-3 gap-4 pt-6 lg:pt-0">
           <div className="col-span-3">
@@ -154,10 +168,12 @@ export default Homepage
 
 export async function getStaticProps() {
   const response = await fetcher("products")
+  const categories = await fetcher("products/categories")
 
   return {
     props: {
       products: response,
+      categories: categories,
     },
   }
 }
