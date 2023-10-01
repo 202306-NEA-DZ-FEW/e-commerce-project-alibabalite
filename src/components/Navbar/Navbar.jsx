@@ -2,6 +2,7 @@ import Link from "next/link"
 import React, { useState, useEffect } from "react"
 import { FaSearch, FaCartArrowDown } from "react-icons/fa"
 import Sidebar from "../Sidebar/Sidebar"
+import { Logo } from "./Logo"
 
 const Navbar = ({
   categoryFilter,
@@ -74,8 +75,8 @@ const Navbar = ({
               />
             </div>
           </div>
-          <Link href={"/"} className="btn btn-ghost normal-case text-xl">
-            LOGO
+          <Link href={"/"}>
+            <Logo />
           </Link>
         </div>
         {/* Navbar Start Ends Here */}
