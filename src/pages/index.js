@@ -4,7 +4,11 @@ import { fetcher } from "@/utils/API"
 import React, { useState } from "react"
 import Navbar from "@/components/Navbar/Navbar"
 
-const Homepage = ({ products }) => {
+const Homepage = ({ products, categories }) => {
+  const [categoryFilter, setCategoryFilter] = useState("all")
+  const [priceFilter, setPriceFilter] = useState([0, 2000])
+  const [ratingFilter, setratingFilter] = useState(1)
+  const [titleFilter, settitleFilter] = useState("")
   console.log(products.products)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -23,7 +27,17 @@ const Homepage = ({ products }) => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        categories={categories}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={setCategoryFilter}
+        priceFilter={priceFilter}
+        setPriceFilter={setPriceFilter}
+        ratingFilter={ratingFilter}
+        setRatingFilter={setratingFilter}
+        titleFilter={titleFilter}
+        setTitleFilter={settitleFilter}
+      />
 
       <main>
         <div className="image-container relative rounded-large w-full h-80 overflow-hidden">
@@ -118,10 +132,12 @@ export default Homepage
 
 export async function getStaticProps() {
   const response = await fetcher("products")
+  const categories = await fetcher("products/categories")
 
   return {
     props: {
       products: response,
+      categories: categories,
     },
   }
 }

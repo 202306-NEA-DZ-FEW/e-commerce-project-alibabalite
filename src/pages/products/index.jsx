@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 import Sidebar from "@/components/Sidebar/Sidebar"
-import ProductCard from "@/components/Productcard/Productcard"
+import ProductCard from "@/components/Cards/ProductCard"
 import { fetcher } from "@/utils/API"
 import Navbar from "@/components/Navbar/Navbar"
+import Link from "next/link"
 
 function ProductsPage({ products, categories }) {
   const [categoryFilter, setCategoryFilter] = useState("all")
@@ -10,6 +11,7 @@ function ProductsPage({ products, categories }) {
   const [ratingFilter, setratingFilter] = useState(1)
   const [titleFilter, settitleFilter] = useState("")
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [sidebarwidth, setsidebarwidth] = useState(true)
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
@@ -21,6 +23,10 @@ function ProductsPage({ products, categories }) {
       setIsSidebarOpen(false)
     }
   }
+  const handleSideBarShow = () => {
+    setIsSidebarOpen(!isSidebarOpen)
+  }
+
   useEffect(() => {
     window.addEventListener("resize", handleResize)
     // Remove the event listener when the component unmounts
@@ -28,11 +34,13 @@ function ProductsPage({ products, categories }) {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
+  let titlepage = "Our Products"
   const filterProducts = () => {
     // Initialize filteredProducts as all products
     let filteredProducts = products.products
 
     if (categoryFilter !== "all") {
+      titlepage = categoryFilter
       filteredProducts = filteredProducts.filter(
         (product) => product.category === categoryFilter,
       )
@@ -64,40 +72,64 @@ function ProductsPage({ products, categories }) {
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        categories={categories}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={setCategoryFilter}
+        priceFilter={priceFilter}
+        setPriceFilter={setPriceFilter}
+        ratingFilter={ratingFilter}
+        setRatingFilter={setratingFilter}
+        titleFilter={titleFilter}
+        setTitleFilter={settitleFilter}
+      />
 
-      <div className="md:grid md:grid-cols-4 md:mt-10 md:ml-3 mr-3s grid grid-cols-4 mt-10 ml-3 mr-3s">
+      <div className={`md:grid md:grid-cols-4  grid grid-cols-4 sm:relative `}>
         <div
-          className={`md:col-span-1 md:ml-3 md:mr-3 md:bg-c col-span-1 ml-3 mr-3 bg-slate-100 ${
+          className={`bg-slate-100 ${
             isSidebarOpen ? "block" : "hidden"
-          } sm:block`}
+          }  md:mr-3 md:bg-c col-span-1 mr-3 }`}
         >
-          <Sidebar
-            categories={categories}
-            categoryFilter={categoryFilter}
-            setCategoryFilter={setCategoryFilter}
-            priceFilter={priceFilter}
-            setPriceFilter={setPriceFilter}
-            ratingFilter={ratingFilter}
-            setRatingFilter={setratingFilter}
-            titleFilter={titleFilter}
-            setTitleFilter={settitleFilter}
-          />
+          <div className={`   z-10  md:mr-3 col-span-1 mr-3 `}>
+            <Sidebar
+              categories={categories}
+              categoryFilter={categoryFilter}
+              setCategoryFilter={setCategoryFilter}
+              priceFilter={priceFilter}
+              setPriceFilter={setPriceFilter}
+              ratingFilter={ratingFilter}
+              setRatingFilter={setratingFilter}
+              titleFilter={titleFilter}
+              setTitleFilter={settitleFilter}
+            />
+          </div>
         </div>
-        <main className="md:col-start-2 md:col-span-3 col-start-2 col-span-3">
+        <main
+          className={` md:col-start-2 md:col-span-3 col-start-2 col-span-3 py-3 ${
+            isSidebarOpen ? "col-start-2 col-span-3 " : "col-start-1 col-span-4"
+          } `}
+        >
           {/* Product cards go here */}
-          <div className="mb-6 px-10 text-3xl">Our Products</div>
-          <div className="flex flex-wrap">
+          <div className="mb-6 px-10 text-3xl">
+            <div className="flex">
+              {titlepage.toUpperCase()}
+              <hr />
+            </div>
+          </div>
+          <div className="flex flex-wrap justify-center">
             {filteredProducts.map((product) => (
-              <ProductCard
-                className={`w-1/4 px-2 mt-2 mb-10`}
-                key={product.id}
-                imageSrc={product.thumbnail}
-                title={product.title}
-                description={product.description}
-                rating={product.rating}
-                price={product.price}
-              />
+              <div key={product.id}>
+                <ProductCard
+                  id={product.id}
+                  className={`w-1/4 px-2 mt-2 mb-10`}
+                  key={product.id}
+                  thumbnail={product.thumbnail}
+                  title={product.title}
+                  description={product.description}
+                  rating={product.rating}
+                  price={product.price}
+                />
+              </div>
             ))}
           </div>
         </main>

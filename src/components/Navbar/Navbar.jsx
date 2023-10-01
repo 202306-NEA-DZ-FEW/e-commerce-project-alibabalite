@@ -1,8 +1,18 @@
 import Link from "next/link"
 import React, { useState, useEffect } from "react"
 import { FaSearch, FaCartArrowDown } from "react-icons/fa"
+import Sidebar from "../Sidebar/Sidebar"
 
-const Navbar = () => {
+const Navbar = ({
+  categoryFilter,
+  setCategoryFilter,
+  priceFilter,
+  setPriceFilter,
+  ratingFilter,
+  setRatingFilter,
+  titleFilter,
+  setTitleFilter,
+}) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [categories, setCategories] = useState([])
 
@@ -20,6 +30,9 @@ const Navbar = () => {
 
   const handleSearchBlur = () => {
     setIsSearchOpen(false)
+  }
+  const handleCategoryClick = (category) => {
+    setCategoryFilter(category)
   }
 
   return (
@@ -44,27 +57,22 @@ const Navbar = () => {
                 />
               </svg>
             </label>
-            <ul
+            <div
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-white rounded-lg w-52 text-slate-900"
             >
-              <li>
-                <Link href={"/"}>Products</Link>
-              </li>
-              <li>
-                <p>Categories</p>
-                <ul className="p-2 text-slate-900">
-                  {categories.map((category) => (
-                    <li
-                      key={category.id}
-                      className="hover:bg-slate-200 p-2 cursor-pointer text-slate-800"
-                    >
-                      <a>{category}</a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
+              <Sidebar
+                categories={categories}
+                categoryFilter={categoryFilter}
+                setCategoryFilter={setCategoryFilter}
+                priceFilter={priceFilter}
+                setPriceFilter={setPriceFilter}
+                ratingFilter={ratingFilter}
+                setRatingFilter={setRatingFilter}
+                titleFilter={titleFilter}
+                setTitleFilter={setTitleFilter}
+              />
+            </div>
           </div>
           <Link href={"/"} className="btn btn-ghost normal-case text-xl">
             LOGO
@@ -75,7 +83,7 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex text-white">
           <ul className="menu menu-horizontal px-1 text-slate-800">
             <li>
-              <Link href={"/"}>Products</Link>
+              <Link href={"/products"}>Products</Link>
             </li>
             <li tabIndex={0}>
               <details>
@@ -85,6 +93,7 @@ const Navbar = () => {
                     <li
                       key={category.id}
                       className="hover:bg-slate-300 hover:rounded-lg cursor-pointer text-slate-800"
+                      onClick={() => handleCategoryClick(category)}
                     >
                       <a>{category}</a>
                     </li>
@@ -130,7 +139,9 @@ const Navbar = () => {
                   className="search-input text-center pt-1 pb-1 text-slate-900 rounded-lg w-full"
                   placeholder="Search..."
                   autoFocus
-                  onBlur={handleSearchBlur}
+                  //onBlur={handleSearchBlur}
+                  value={titleFilter}
+                  onChange={(e) => setTitleFilter(e.target.value)}
                 />
               </div>
             </div>
