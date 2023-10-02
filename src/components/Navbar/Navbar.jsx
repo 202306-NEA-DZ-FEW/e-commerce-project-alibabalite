@@ -1,8 +1,13 @@
 import Link from "next/link"
-import React, { useState, useEffect } from "react"
 import { FaSearch, FaCartArrowDown } from "react-icons/fa"
 import Sidebar from "../Sidebar/Sidebar"
 import { Logo } from "./Logo"
+
+import { SideBarContext } from "@/contexts/SideBarProvider"
+import React, { useState, useEffect, useContext } from "react"
+import { HiOutlineShoppingBag } from "react-icons/hi"
+import { CartContext } from "@/contexts/CartProvider"
+import { PiCoatHanger } from "react-icons/pi"
 
 const Navbar = ({
   categoryFilter,
@@ -16,6 +21,14 @@ const Navbar = ({
 }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [categories, setCategories] = useState([])
+  // const [isActive, setIsActive] = useState(false)
+  const { isOpen, setIsOpen } = useContext(SideBarContext)
+  const { itemAmount } = useContext(CartContext)
+  // useEffect(() => {
+  //   window.addEventListener('scroll', () => {
+  //     window.scrollY > 60 ? setIsActive(true) : setIsActive(false)
+  //   })
+  // })
 
   useEffect(() => {
     fetch("https://dummyjson.com/products/categories")
@@ -147,7 +160,10 @@ const Navbar = ({
               </div>
             </div>
           )}
-          <button className="btn btn-ghost btn-circle hover:bg-slate-800 hover:text-slate-200">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="btn btn-ghost btn-circle hover:bg-slate-800 hover:text-slate-200"
+          >
             <div className="indicator">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -163,9 +179,13 @@ const Navbar = ({
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-xs badge-primary indicator-item">
-                Test
-              </span>
+              <div
+                className="bg-red-500 absolute -right-2 bottom-3
+                 text-[10px] w-[16px] h-[16px] text-white rounded-full flex justify-center 
+                 items-center"
+              >
+                {itemAmount}
+              </div>
             </div>
           </button>
         </div>

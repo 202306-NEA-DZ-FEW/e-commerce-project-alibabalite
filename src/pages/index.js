@@ -1,8 +1,10 @@
 import ProductCard from "@/components/Cards/ProductCard"
 import FlashCard from "@/components/Cards/FlashCard"
+import { useContext } from "react"
 import { fetcher } from "@/utils/API"
 import React from "react"
 import Navbar from "@/components/Navbar/Navbar"
+import CartSidebar from "../components/CartSidebar/CartSidebar"
 import Carousel from "@/components/Carousel"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
@@ -53,6 +55,7 @@ const Homepage = ({ products, categories }) => {
         titleFilter={titleFilter}
         setTitleFilter={settitleFilter}
       />
+      <CartSidebar />
       <main className="bg-gray-100">
         <div className="grid grid-cols-3 gap-4 pt-6 lg:pt-0">
           <div className="col-span-3">
@@ -82,6 +85,7 @@ const Homepage = ({ products, categories }) => {
             .map((product, index) => (
               <div key={index}>
                 <FlashCard
+                  product={product}
                   id={product.id}
                   key={index}
                   thumbnail={product.thumbnail}

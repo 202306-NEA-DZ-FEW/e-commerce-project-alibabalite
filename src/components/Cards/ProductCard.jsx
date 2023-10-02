@@ -1,11 +1,14 @@
 import React from "react"
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs"
 import { TbShoppingCartPlus } from "react-icons/tb"
+import { useContext } from "react"
+import { CartContext } from "@/contexts/CartProvider"
 import Link from "next/link"
 // import Link from "next/link"
 // import { genresList } from "@/utils/static"
 
-const ProductCard = ({ key, rating, price, title, thumbnail, id }) => {
+const ProductCard = ({ key, rating, price, title, thumbnail, id, product }) => {
+  const { addToCart } = useContext(CartContext)
   const renderStars = () => {
     const stars = []
     const fullStars = Math.floor(rating / 2)
@@ -57,7 +60,10 @@ const ProductCard = ({ key, rating, price, title, thumbnail, id }) => {
           <p className="font-bold text-red-700 text-sm mt-3">${price}</p>
         </div>
         <div className="px-6 mb-2 flex justify-end">
-          <button className="bg-blue-500 hover:bg-yellow-500 text-white font-semibold px-4 py-1 rounded-lg inline-flex items-center">
+          <button
+            onClick={() => addToCart(product, id)}
+            className="bg-blue-500 hover:bg-yellow-500 text-white font-semibold px-4 py-1 rounded-lg inline-flex items-center"
+          >
             <TbShoppingCartPlus className="mr-1" />
             Add
           </button>

@@ -3,6 +3,7 @@ import Sidebar from "@/components/Sidebar/Sidebar"
 import ProductCard from "@/components/Cards/ProductCard"
 import { fetcher } from "@/utils/API"
 import Navbar from "@/components/Navbar/Navbar"
+import CartSidebar from "@/components/CartSidebar/CartSidebar"
 import Link from "next/link"
 
 function ProductsPage({ products, categories }) {
@@ -83,6 +84,7 @@ function ProductsPage({ products, categories }) {
         titleFilter={titleFilter}
         setTitleFilter={settitleFilter}
       />
+      <CartSidebar />
 
       <div className="md:grid-cols-4 gap-4 grid grid-cols-4  ">
         <div
@@ -120,6 +122,7 @@ function ProductsPage({ products, categories }) {
             {filteredProducts.map((product) => (
               <div className="md:w-1/4 w-full" key={product.id}>
                 <ProductCard
+                  product={product}
                   id={product.id}
                   key={product.id}
                   thumbnail={product.thumbnail}

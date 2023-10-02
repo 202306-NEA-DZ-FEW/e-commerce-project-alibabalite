@@ -4,6 +4,8 @@ import { TbShoppingCartPlus } from "react-icons/tb"
 import { BsStar } from "react-icons/bs"
 import { FaStar, FaStarHalfAlt } from "react-icons/fa"
 import Link from "next/link"
+import { useContext } from "react"
+import { CartContext } from "@/contexts/CartProvider"
 
 const FlashCard = ({
   rating,
@@ -12,6 +14,7 @@ const FlashCard = ({
   title,
   thumbnail,
   id,
+  product,
 }) => {
   const renderStars = () => {
     const stars = []
@@ -46,6 +49,7 @@ const FlashCard = ({
     const discount = (discountPercentage / 100) * originalPrice
     return (originalPrice - discount).toFixed(2)
   }
+  const { addToCart } = useContext(CartContext)
 
   return (
     <div className=" grid grid-row-2 rounded-lg overflow-hidden shadow-lg w-full mb-4  transition-transform duration-300 ease-in-out hover:scale-105">
@@ -79,7 +83,10 @@ const FlashCard = ({
           </div>
         </div>
         <div className="px-6 mb-2 flex justify-end">
-          <button className="bg-blue-500 hover:bg-yellow-500 text-white font-semibold px-4 py-1 rounded-lg inline-flex items-center">
+          <button
+            onClick={() => addToCart(product, id)}
+            className="bg-blue-500 hover:bg-yellow-500 text-white font-semibold px-4 py-1 rounded-lg inline-flex items-center"
+          >
             <TbShoppingCartPlus className="mr-1" />
             Add
           </button>

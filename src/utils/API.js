@@ -12,6 +12,8 @@ export async function fetcher(apiRoute) {
   return data
 }
 
+///////////////////////
+
 // export async function fetcher(apiRoute) {
 //   const url = "https://dummyjson.com/" + apiRoute
 

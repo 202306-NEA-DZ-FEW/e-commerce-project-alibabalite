@@ -4,6 +4,9 @@ import { FaStar, FaCartPlus, MdProductionQuantityLimits } from "react-icons/fa"
 import { useRouter } from "next/router"
 import ProgressCard from "@/components/Cards/ProgressCard"
 import Navbar from "@/components/Navbar/Navbar"
+import { useContext } from "react"
+import { CartContext } from "@/contexts/CartProvider"
+import CartSidebar from "@/components/CartSidebar/CartSidebar"
 
 export default function singleProductPage({
   productData,
@@ -19,7 +22,7 @@ export default function singleProductPage({
   const [selectedImage, setSelectedImage] = useState(
     `https://i.dummyjson.com/data/products/${productId}/thumbnail.jpg`,
   )
-
+  const { addToCart } = useContext(CartContext)
   const handleThumbnailClick = (imageSrc) => {
     setSelectedImage(imageSrc)
   }
@@ -38,6 +41,7 @@ export default function singleProductPage({
         titleFilter={titleFilter}
         setTitleFilter={settitleFilter}
       />
+      <CartSidebar />
       <main className="h-full w-full">
         {/* Product Details Section */}
         <div className="first-section w-full grid grid-cols-2 gap-10 pl-20 pr-20">
@@ -130,7 +134,10 @@ export default function singleProductPage({
               </p>
             </div>
             <div className="cart-section col-span-3 mt-4">
-              <button className="btn btn-primary hover:bg-cyan-700 hover:text-white rounded-lg w-full">
+              <button
+                onClick={() => addToCart(productData, productData.id)}
+                className="btn btn-primary hover:bg-cyan-700 hover:text-white rounded-lg w-full"
+              >
                 Add to Cart <FaCartPlus />
               </button>
             </div>
