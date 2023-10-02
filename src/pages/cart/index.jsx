@@ -1,9 +1,11 @@
 import Cartpage from "@/components/CartPage/Cartpage"
 import Navbar from "@/components/Navbar/Navbar"
-import React from "react"
+import React, { useContext } from "react"
 import ProductCard from "@/components/Productcard/Productcard"
+import { CartContext } from "@/contexts/CartProvider"
 
 const Cart = ({ products }) => {
+  const { cart } = useContext(CartContext)
   console.log("cartpage", products)
   return (
     <div>
