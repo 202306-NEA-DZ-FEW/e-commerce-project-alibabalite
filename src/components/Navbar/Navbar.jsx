@@ -147,7 +147,7 @@ const Navbar = ({
           </button>
           {isSearchOpen && (
             <div className="absolute top-full left-0 w-full bg-slate-100 text-slate-900 p-2 transition-transform duration-300 ease-in-out transform translate-y-0 opacity-100 scale-y-100">
-              <div className="form-control">
+              <div className="form-control z-100">
                 <input
                   type="text"
                   className="search-input text-center pt-1 pb-1 text-slate-900 rounded-lg w-full"

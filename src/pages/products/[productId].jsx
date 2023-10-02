@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar/Navbar"
 import { useContext } from "react"
 import { CartContext } from "@/contexts/CartProvider"
 import CartSidebar from "@/components/CartSidebar/CartSidebar"
+import Footer from "@/components/Footer/Footer"
 
 export default function singleProductPage({
   productData,
@@ -173,6 +174,7 @@ export default function singleProductPage({
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

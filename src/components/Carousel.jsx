@@ -18,7 +18,7 @@ export default function Carousel({ thumbnail, title, price, id }) {
       </div>
       <Link href={"products/" + id}>
         <img
-          className="w-full h-full rounded-xl bg-center bg-cover "
+          className="w-full h-full bg-center bg-cover "
           src={thumbnail}
           alt={title}
         />

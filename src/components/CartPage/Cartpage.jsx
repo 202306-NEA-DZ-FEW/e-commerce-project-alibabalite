@@ -38,7 +38,7 @@ const Cartpage = () => {
         </h1>
         <div className="flex justify-between items-center text-sm text-gray-800 ">
           <h2>Subtotal</h2>
-          <span>{parseFloat(total).toFixed(2)} DA</span>
+          <span>{parseFloat(total).toFixed(2)} $</span>
         </div>
         <div className="flex justify-between items-center text-sm text-gray-800 ">
           <h2>Tax / item</h2>

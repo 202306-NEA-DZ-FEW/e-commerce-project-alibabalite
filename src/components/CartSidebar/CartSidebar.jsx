@@ -41,7 +41,7 @@ const CartSidebar = () => {
         <div className=" relative flex w-full border rounded-sm bg-gray-100 border-gray-200  justify-between items-center mb-0">
           <div className="uppercase font-semibold text-gray-800">
             <span className=" mx-2 ">Total : </span>
-            {parseFloat(total).toFixed(2)} DA
+            {parseFloat(total).toFixed(2)} $
           </div>
           {cart.length === 0 ? (
             ""

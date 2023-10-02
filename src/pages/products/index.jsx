@@ -5,6 +5,7 @@ import { fetcher } from "@/utils/API"
 import Navbar from "@/components/Navbar/Navbar"
 import CartSidebar from "@/components/CartSidebar/CartSidebar"
 import Link from "next/link"
+import Footer from "@/components/Footer/Footer"
 
 function ProductsPage({ products, categories }) {
   const [categoryFilter, setCategoryFilter] = useState("all")
@@ -136,6 +137,7 @@ function ProductsPage({ products, categories }) {
           </div>
         </main>
       </div>
+      <Footer />
     </div>
   )
 }

@@ -10,6 +10,7 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { useState } from "react"
+import Footer from "@/components/Footer/Footer"
 
 const Homepage = ({ products, categories }) => {
   const [categoryFilter, setCategoryFilter] = useState("all")
@@ -22,7 +23,7 @@ const Homepage = ({ products, categories }) => {
   var settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     pauseOnHover: false,
@@ -167,6 +168,7 @@ const Homepage = ({ products, categories }) => {
           ))}
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

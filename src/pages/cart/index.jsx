@@ -4,6 +4,7 @@ import React from "react"
 import ProductCard from "@/components/Productcard/Productcard"
 import { fetcher } from "@/utils/API"
 import { useState } from "react"
+import Footer from "@/components/Footer/Footer"
 
 const Cart = ({ products, productss, categories }) => {
   console.log("cartpage", products)
@@ -40,6 +41,7 @@ const Cart = ({ products, productss, categories }) => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
