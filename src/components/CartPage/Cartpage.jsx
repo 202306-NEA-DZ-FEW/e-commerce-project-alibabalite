@@ -59,7 +59,7 @@ const Cartpage = () => {
             {total === 0
               ? parseFloat(total).toFixed(2)
               : parseFloat(total + (Tax + Shipping)).toFixed(2)}
-            DA
+            $
           </span>
         </div>
         <button
