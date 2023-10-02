@@ -84,13 +84,13 @@ function ProductsPage({ products, categories }) {
         setTitleFilter={settitleFilter}
       />
 
-      <div className={`md:grid md:grid-cols-4  grid grid-cols-4 sm:relative `}>
+      <div className="md:grid-cols-4 gap-4 grid grid-cols-4  ">
         <div
           className={`bg-slate-100 ${
             isSidebarOpen ? "block" : "hidden"
           }  md:mr-3 md:bg-c col-span-1 mr-3 }`}
         >
-          <div className={`   z-10  md:mr-3 col-span-1 mr-3 `}>
+          <div className={`z-10  md:mr-3 col-span-1 mr-3 `}>
             <Sidebar
               categories={categories}
               categoryFilter={categoryFilter}
@@ -105,7 +105,7 @@ function ProductsPage({ products, categories }) {
           </div>
         </div>
         <main
-          className={` md:col-start-2 md:col-span-3 col-start-2 col-span-3 py-3 ${
+          className={` md:col-start-2 md:col-span-3 col-start-1 col-span-3 py-3 ${
             isSidebarOpen ? "col-start-2 col-span-3 " : "col-start-1 col-span-4"
           } `}
         >
@@ -116,12 +116,11 @@ function ProductsPage({ products, categories }) {
               <hr />
             </div>
           </div>
-          <div className="flex flex-wrap justify-center">
+          <div className="flex flex-col md:flex-row gap-x-4 flex-wrap justify-center">
             {filteredProducts.map((product) => (
-              <div key={product.id}>
+              <div className="md:w-1/4 w-full" key={product.id}>
                 <ProductCard
                   id={product.id}
-                  className={`w-1/4 px-2 mt-2 mb-10`}
                   key={product.id}
                   thumbnail={product.thumbnail}
                   title={product.title}

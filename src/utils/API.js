@@ -3,7 +3,6 @@ export async function fetcher(apiRoute) {
 
   const options = {
     method: "GET",
-
     headers: {
       accept: "application/json",
     },

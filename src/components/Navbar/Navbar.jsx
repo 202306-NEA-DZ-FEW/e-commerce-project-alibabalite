@@ -96,7 +96,7 @@ const Navbar = ({
                       className="hover:bg-slate-300 hover:rounded-lg cursor-pointer text-slate-800"
                       onClick={() => handleCategoryClick(category)}
                     >
-                      <a>{category}</a>
+                      <a href="/products">{category}</a>
                     </li>
                   ))}
                 </ul>
