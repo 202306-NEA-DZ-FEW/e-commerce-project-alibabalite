@@ -7,14 +7,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      container: {
-        center: true,
-        padding: "15px",
-      },
-      colors: {
-        accent: "#FF8F9C",
-        blackish: "#1b1b1b",
-      },
       screens: {
         sm: "640px",
         md: "768px",
@@ -23,5 +15,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }

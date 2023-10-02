@@ -1,5 +1,5 @@
 export async function fetcher(apiRoute) {
-  const url = "https://fakestoreapi.com/" + apiRoute
+  const url = "https://dummyjson.com/" + apiRoute
 
   const options = {
     method: "GET",

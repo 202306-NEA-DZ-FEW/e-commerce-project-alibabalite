@@ -1,10 +1,12 @@
+import Navbar from "@/components/Navbar/Navbar"
 import { Html, Head, Main, NextScript } from "next/document"
+import CartSidebar from "@/components/CartSidebar/CartSidebar"
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html className="bg-slate-100" lang="en">
       <Head />
-      <body>
+      <body className="bg-slate-100">
         <Main />
         <NextScript />
       </body>

@@ -9,18 +9,18 @@ const CartItems = ({ item }) => {
   const { deleteFromCart, increaseAmount, decreaseAmount } =
     useContext(CartContext)
 
-  const { id, title, image, price, amount } = item
+  const { id, title, thumbnail, price, amount } = item
   return (
     <div className="flex gap-x-3 py-2 lg:px-4 border-b border-gray-300 w-full font-light">
       <div className="w-full min-h-[100px] flex items-center gap-x-2">
         <Link href={`/product${id}`}>
-          <img className="max-w-[60px]" src={image} />
+          <img className="max-w-[60px]" src={thumbnail} />
         </Link>
         <div className="w-full flex flex-col">
           <div className="flex justify-between">
             <Link
               className="text-[12px] uppercase font-medium max-w-[190px] text-gray-600 hover:underline "
-              href={`/product${id}`}
+              href={`/products${id}`}
             >
               {title}
             </Link>
@@ -52,7 +52,7 @@ const CartItems = ({ item }) => {
                 <AiOutlinePlusSquare className="hover:text-green-600 text-lg" />
               </div>
             </div>
-            <div className="flex flex-1 justify-around items-center font-normal">
+            <div className="flex flex-1 justify-around items-center text-sm text-gray-800 font-normal">
               {price} DA
             </div>
             <div className="flex flex-1 justify-end items-center text-gray-600 font-medium">

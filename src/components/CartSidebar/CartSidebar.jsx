@@ -6,7 +6,7 @@ import { CartContext } from "@/contexts/CartProvider"
 import CartItems from "../CartItems/CartItems"
 import Link from "next/link"
 
-const Sidebar = () => {
+const CartSidebar = () => {
   const { isOpen, handleClose } = useContext(SideBarContext)
   const { cart, clearCart, total, itemAmount } = useContext(CartContext)
   return (
@@ -18,12 +18,12 @@ const Sidebar = () => {
         z-20 px-1 lg:[35px]`}
     >
       <div className="flex items-center justify-between py-6 border-b">
-        <div className="uppercase px-2 text-sm font-semibold">
+        <div className="uppercase px-2 text-sm text-gray-800 font-semibold">
           ShoppingBag ({itemAmount})
         </div>
         <div
           onClick={handleClose}
-          className="cursor-pointer w-6 h-6 flex justify-center"
+          className="cursor-pointer w-6 h-6 flex justify-center text-gray-800"
         >
           <BsArrowRightShort className="text-2xl" />
         </div>
@@ -38,22 +38,25 @@ const Sidebar = () => {
       </div>
       <div>
         <div className=" relative flex w-full border rounded-sm bg-gray-100 border-gray-200  justify-between items-center mb-0">
-          <div className="uppercase font-semibold ">
+          <div className="uppercase font-semibold text-gray-800">
             <span className=" mx-2 ">Total : </span>
             {parseFloat(total).toFixed(2)} DA
           </div>
-
-          <div
-            onClick={clearCart}
-            className="cursor-pointer  text-white bg-gray-700 hover:bg-red-500 h-[40px] w-8 flex justify-center items-center border rounded-sm"
-          >
-            <RiDeleteBinFill />
-          </div>
+          {cart.length === 0 ? (
+            ""
+          ) : (
+            <div
+              onClick={clearCart}
+              className="cursor-pointer  text-white bg-gray-700 hover:bg-red-500 h-[40px] w-8 flex justify-center items-center border rounded-sm"
+            >
+              <RiDeleteBinFill />
+            </div>
+          )}
         </div>
         <Link
           className="hover:bg-yellow-400 bg-gray-300 flex p-2 justify-center items-center
                 text-gray-700 font-medium transition-all duration-150"
-          href="/pages/cart"
+          href="/cart"
         >
           View Cart
         </Link>
@@ -69,4 +72,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default CartSidebar
